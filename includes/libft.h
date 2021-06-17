@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/22 14:16:53 by ywake             #+#    #+#             */
-/*   Updated: 2021/06/17 22:10:21 by ywake            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -64,7 +52,7 @@ t_list			*ft_lstnew(void *content);
 /*
 ** ft_lstadd_front: O(1)
 */
-void			ft_lstadd_front(t_list **lst, t_list *new);
+void			ft_lstadd_front(t_list **lst, t_list *newlst);
 /*
 ** ft_lstsize: O(n)
 */
@@ -76,7 +64,7 @@ t_list			*ft_lstlast(t_list *lst);
 /*
 ** ft_lstadd_back: O(n)
 */
-void			ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_lstadd_back(t_list **lst, t_list *newlst);
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
