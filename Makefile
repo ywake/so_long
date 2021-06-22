@@ -1,11 +1,13 @@
 NAME	:= so_long
 CC		:= gcc
 INCLUDE	:= -I./includes -I./Libft -I./minilibx-linux
-CFLAGS	:= -Wall -Werror -Wextra $(INCLUDE)
+CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBFT	:= ./libs/libft.a
 LIBS	:= -L./libs -lft -lXext -lX11 -lm
 SRCDIR	:= ./srcs/
-SRCS	:= main.c
+SRCS	:= main.c error.c\
+			stage/stage.c\
+			utils/ft_xmalloc.c utils/get_next_line.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 
 ifeq ($(shell uname), Linux)
@@ -49,5 +51,6 @@ norm:
 	@norminette srcs includes Libft | grep -v ": OK!" \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
-test:
-	@echo $(LIBS)
+test: $(OBJS) $(LIBFT)
+	$(CC) $(LIBS) $(OBJS) ./test/sharedlib.c -o $(NAME)
+	./so_long test/test.ber

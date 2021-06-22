@@ -1,6 +1,7 @@
 #include "error.h"
 
 #include <stdlib.h>
+#include "libft.h"
 #include "logging.h"
 
 void	error(char	*msg)
