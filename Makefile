@@ -53,4 +53,4 @@ norm:
 
 test: $(OBJS) $(LIBFT)
 	$(CC) $(LIBS) $(OBJS) ./test/sharedlib.c -o $(NAME)
-	bash auto_test.sh
+	bash auto_test.sh $(TEST)

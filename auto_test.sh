@@ -1,6 +1,10 @@
 export REPO_ROOT="$PWD"
 
 DIR="./test"
+if [ "$1" != "" ]; then
+	DIR="$DIR/$1"
+fi
+echo ">>> $DIR <<<"
 FLG=0
 for path in $(find "$DIR" -type f -name "test.sh");
 do
