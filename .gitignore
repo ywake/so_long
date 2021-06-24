@@ -12,7 +12,8 @@
 !includes/*.h
 !libs/libmlx_Linux.a
 !libs/libmlx.dylib
-!textures/
-!textures/*.xpm
-!cubfiles/
-!cubfiles/*.cub
+!auto_test.sh
+!test/
+!test/**/
+!test/**/test.sh
+!test/**/*.ber

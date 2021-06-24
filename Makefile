@@ -16,7 +16,7 @@ else
 	LIBS +=  -L/usr/X11R6/lib -lmlx_Darwin
 endif
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus test
 
 all: $(NAME)
 
@@ -53,4 +53,4 @@ norm:
 
 test: $(OBJS) $(LIBFT)
 	$(CC) $(LIBS) $(OBJS) ./test/sharedlib.c -o $(NAME)
-	./so_long test/test.ber
+	bash auto_test.sh
