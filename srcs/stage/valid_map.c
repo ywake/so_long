@@ -39,7 +39,7 @@ void	valid_map_line(char *line, t_count *c)
 	i = 0;
 	while (line[i])
 	{
-		if(ft_strchr("01CEP", line[i]) == NULL)
+		if (ft_strchr("01CEP", line[i]) == NULL)
 			error("MAP: Unusable characters are used.");
 		if (line[i] == 'C')
 			c->collectible++;
