@@ -8,7 +8,6 @@
 
 void	open_ber(char *filepath, t_stage *stg, t_list **map);
 void	read_map(t_stage *stg, t_list *map);
-void	valid_map(t_stage *stg);
 
 void	print_map(char **map)
 {
@@ -37,6 +36,7 @@ t_stage	*new_stage(char *filepath)
 	read_map(stage, map);
 	ft_lstclear(&save, free);
 	print_map(stage->map);
+	valid_map(stage);
 	return (stage);
 }
 
