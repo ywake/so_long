@@ -9,20 +9,6 @@
 void	open_ber(char *filepath, t_stage *stg, t_list **map);
 void	read_map(t_stage *stg, t_list *map);
 
-void	print_map(char **map)
-{
-	int	len;
-	int	i;
-
-	len = ft_strcount(map);
-	i = 0;
-	while (i < len)
-	{
-		ft_putendl_fd(map[i], 1);
-		i++;
-	}
-}
-
 t_stage	*new_stage(char *filepath)
 {
 	t_list	*map;
@@ -35,7 +21,6 @@ t_stage	*new_stage(char *filepath)
 	save = map;
 	read_map(stage, map);
 	ft_lstclear(&save, free);
-	print_map(stage->map);
 	valid_map(stage);
 	return (stage);
 }
@@ -97,4 +82,26 @@ void	read_map(t_stage *stg, t_list *map)
 		stg->map[rows] = ft_strdup((char *)map->content);
 		map = map->next;
 	}
+}
+
+size_t	stage_count_obj(t_stage *stg, char c)
+{
+	size_t	x;
+	size_t	y;
+	size_t	rtn;
+
+	rtn = 0;
+	y = 0;
+	while (y < (size_t)stg->rows)
+	{
+		x = 0;
+		while (x < (size_t)stg->cols)
+		{
+			if (stg->map[y][x] == c)
+				rtn++;
+			x++;
+		}
+		y++;
+	}
+	return (rtn);
 }

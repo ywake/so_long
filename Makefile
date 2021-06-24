@@ -5,7 +5,8 @@ CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBFT	:= ./libs/libft.a
 LIBS	:= -L./libs -lft -lXext -lX11 -lm
 SRCDIR	:= ./srcs/
-SRCS	:= main.c error.c\
+SRCS	:= main.c error.c callbacks.c\
+			game/game.c game/console.c\
 			stage/stage.c stage/valid_map.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
