@@ -6,12 +6,16 @@
 #include "mlx.h"
 #include "error.h"
 #include "stage.h"
+#include "img.h"
+#include "property.h"
 
 void	init_player(t_game *game);
 
 t_game	*new_game(char *filepath)
 {
 	t_game	*game;
+	int		width;
+	int		height;
 
 	game = ft_xmalloc(sizeof(t_game));
 	game->flg_win = false;
@@ -19,12 +23,15 @@ t_game	*new_game(char *filepath)
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
 		error("A problem occurred in mlx_init.");
-	game->win = mlx_new_window(game->mlx, 100, 100, "so_long");
+	game->stage = new_stage(filepath);
+	width = game->stage->cols * TILE_SIZE;
+	height = game->stage->rows * TILE_SIZE;
+	game->win = mlx_new_window(game->mlx, width, height, "so_long");
 	if (game->mlx == NULL)
 		error("A problem occurred in mlx_new_widow.");
-	game->stage = new_stage(filepath);
 	game->player = ft_xmalloc(sizeof(t_player));
 	init_player(game);
+	game->img = new_img(game->mlx, width, height);
 	return (game);
 }
 
@@ -56,6 +63,7 @@ void	init_player(t_game *game)
 
 t_game	*del_game(t_game *game)
 {
+	del_img(game->img);
 	free(game->player);
 	game->stage = del_stage(game->stage);
 	mlx_destroy_window(game->mlx, game->win);
@@ -85,11 +93,8 @@ bool	player_move(t_game *game)
 	return (true);
 }
 
-bool	win_check(t_game *game)
+void	game_render(t_game *game)
 {
-	if (game->stage->map[game->player->y][game->player->x] != 'E')
-		return (false);
-	if (stage_count_obj(game->stage, 'C') == 0)
-		return (true);
-	return (false);
+	draw_stage(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
 }

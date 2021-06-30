@@ -31,6 +31,15 @@ int	press_key(int key, t_game *game)
 	return (0);
 }
 
+bool	win_check(t_game *game)
+{
+	if (game->stage->map[game->player->y][game->player->x] != 'E')
+		return (false);
+	if (stage_count_obj(game->stage, 'C') == 0)
+		return (true);
+	return (false);
+}
+
 int	main_loop(t_game *game)
 {
 	if (game->flg_render)
@@ -40,6 +49,7 @@ int	main_loop(t_game *game)
 		printf("--- %zuT ---\n", game->steps);
 		print_map(game);
 		printf("\n");
+		game_render(game);
 		game->flg_render = false;
 		if (win_check(game))
 		{
