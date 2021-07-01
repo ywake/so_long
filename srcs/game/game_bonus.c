@@ -46,7 +46,7 @@ void	init_player(t_game *game)
 
 	game->player->move_x = 0;
 	game->player->move_y = 0;
-	game->player->tx[0] = new_texture(game->mlx, PATH_PLAYER);
+	init_player_texture(game);
 	y = 0;
 	while (y < (size_t)game->stage->rows)
 	{
@@ -70,7 +70,7 @@ t_game	*del_game(t_game *game)
 {
 	del_textures(game->mlx, game->textures);
 	del_img(game->img);
-	game->player->tx[0] = del_texture(game->mlx, game->player->tx[0]);
+	del_player_texture(game);
 	free(game->player);
 	game->stage = del_stage(game->stage);
 	mlx_destroy_window(game->mlx, game->win);

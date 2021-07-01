@@ -13,7 +13,7 @@ typedef struct s_player
 	size_t		y;
 	int			move_x;
 	int			move_y;
-	t_texture	*tx;
+	t_texture	*tx[6];
 }	t_player;
 
 typedef struct s_game
@@ -27,6 +27,7 @@ typedef struct s_game
 	size_t		steps;
 	bool		flg_render;
 	int			flg_win;
+	int			frame;
 }	t_game;
 
 t_game	*new_game(char *filepath);
@@ -34,5 +35,8 @@ t_game	*del_game(t_game *game);
 bool	player_move(t_game *game);
 void	game_render(t_game *game);
 void	draw_stage(t_game *game);
+void	init_player_texture(t_game *game);
+void	del_player_texture(t_game *game);
+void	draw_player(t_game *game);
 
 #endif

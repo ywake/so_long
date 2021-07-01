@@ -2,6 +2,7 @@
 
 #include "property.h"
 #include "texture.h"
+#include "mlx.h"
 
 void	draw_rectangle(t_img *img, int x, int y, int color)
 {
@@ -63,10 +64,34 @@ void	draw_stage(t_game *game)
 				draw_texture(game->img, x, y, game->textures[TX_EXIT]);
 			else if (game->stage->map[y][x] == 'O')
 				draw_texture(game->img, x, y, game->textures[TX_OPPO]);
-			if (x == (int)game->player->x && y == (int)game->player->y)
-				draw_texture(game->img, x, y, game->player->tx);
 			x++;
 		}
 		y++;
 	}
+}
+
+void	draw_player(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < game->stage->rows)
+	{
+		x = 0;
+		while (x < game->stage->cols)
+		{
+			if (x == (int)game->player->x && y == (int)game->player->y)
+			{
+				draw_texture(game->img, x, y, game->textures[TX_FLOOR]);
+				if (game->stage->map[y][x] == 'E')
+					draw_texture(game->img, x, y, game->textures[TX_EXIT]);
+				draw_texture(game->img, x, y,
+					game->player->tx[game->frame / 600]);
+			}
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(game->mlx, game->win, game->img->img_ptr, 0, 0);
 }

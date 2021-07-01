@@ -62,7 +62,7 @@ void	draw_stage(t_game *game)
 			else if (game->stage->map[y][x] == 'E')
 				draw_texture(game->img, x, y, game->textures[TX_EXIT]);
 			if (x == (int)game->player->x && y == (int)game->player->y)
-				draw_texture(game->img, x, y, game->player->tx);
+				draw_texture(game->img, x, y, game->player->tx[0]);
 			x++;
 		}
 		y++;

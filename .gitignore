@@ -2,6 +2,8 @@
 !.gitignore
 !assets
 !assets/*.xpm
+!assets/animation
+!assets/animation/*.xpm
 !Libft
 !minilibx-linux
 !Makefile

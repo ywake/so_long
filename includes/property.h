@@ -19,4 +19,11 @@
 # define PATH_PLAYER		("./assets/DinoSprites32.xpm")
 # define PATH_OPPO			("./assets/DinoSprites_mort32_R.xpm")
 
+# define PATH_PLAYER_0		("./assets/animation/DinoSprites_doux32_0.xpm")
+# define PATH_PLAYER_1		("./assets/animation/DinoSprites_doux32_1.xpm")
+# define PATH_PLAYER_2		("./assets/animation/DinoSprites_doux32_2.xpm")
+# define PATH_PLAYER_3		("./assets/animation/DinoSprites_doux32_3.xpm")
+# define PATH_PLAYER_4		("./assets/animation/DinoSprites_doux32_4.xpm")
+# define PATH_PLAYER_5		("./assets/animation/DinoSprites_doux32_5.xpm")
+
 #endif

@@ -60,6 +60,8 @@ int	main_loop(t_game *game)
 		if (game->flg_win)
 			close_game(game);
 	}
+	draw_player(game);
+	game->frame = (game->frame + 1) % 3600;
 	return (0);
 }
 
