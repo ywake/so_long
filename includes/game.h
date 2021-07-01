@@ -5,13 +5,15 @@
 # include <stdbool.h>
 # include "stage.h"
 # include "img.h"
+# include "texture.h"
 
 typedef struct s_player
 {
-	size_t	x;
-	int		move_x;
-	size_t	y;
-	int		move_y;
+	size_t		x;
+	size_t		y;
+	int			move_x;
+	int			move_y;
+	t_texture	*tx;
 }	t_player;
 
 typedef struct s_game
@@ -21,6 +23,7 @@ typedef struct s_game
 	t_stage		*stage;
 	t_player	*player;
 	t_img		*img;
+	t_texture	**textures;
 	size_t		steps;
 	bool		flg_render;
 	bool		flg_win;

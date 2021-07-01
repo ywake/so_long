@@ -12,4 +12,10 @@
 # define C_WHITE		(0xFFFFFF)
 # define C_BLACK		(0x000000)
 
+# define PATH_COLLECTIBLE	("./assets/collectible.xpm")
+# define PATH_EXIT			("./assets/exit.xpm")
+# define PATH_FLOOR			("./assets/floor.xpm")
+# define PATH_WALL			("./assets/wall.xpm")
+# define PATH_PLAYER		("./assets/DinoSprites32.xpm")
+
 #endif

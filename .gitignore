@@ -1,6 +1,7 @@
 *
 !.gitignore
 !assets
+!assets/*.xpm
 !Libft
 !minilibx-linux
 !Makefile

@@ -10,7 +10,6 @@ typedef struct s_img
 	int		*data;
 	int		width;
 	int		height;
-	double	screen_dist;
 
 	int		size_l;
 	int		bpp;

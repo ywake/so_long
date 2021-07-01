@@ -8,6 +8,7 @@ SRCDIR	:= ./srcs/
 SRCS	:= main.c error.c callbacks.c\
 			game/game.c game/console.c game/img.c game/draw.c\
 			stage/stage.c stage/valid_map.c\
+			assets/texture.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 
@@ -21,7 +22,7 @@ endif
 
 all: $(NAME)
 
-%.o: $(SRCDIR)%.c
+%.o: $(SRCDIR)%.c *.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 init:

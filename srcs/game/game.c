@@ -8,6 +8,7 @@
 #include "stage.h"
 #include "img.h"
 #include "property.h"
+#include "texture.h"
 
 void	init_player(t_game *game);
 
@@ -18,6 +19,7 @@ t_game	*new_game(char *filepath)
 	int		height;
 
 	game = ft_xmalloc(sizeof(t_game));
+	game->steps = 0;
 	game->flg_win = false;
 	game->flg_render = true;
 	game->mlx = mlx_init();
@@ -32,6 +34,7 @@ t_game	*new_game(char *filepath)
 	game->player = ft_xmalloc(sizeof(t_player));
 	init_player(game);
 	game->img = new_img(game->mlx, width, height);
+	game->textures = new_textures(game->mlx);
 	return (game);
 }
 
@@ -42,6 +45,7 @@ void	init_player(t_game *game)
 
 	game->player->move_x = 0;
 	game->player->move_y = 0;
+	game->player->tx = new_texture(game->mlx, PATH_PLAYER);
 	y = 0;
 	while (y < (size_t)game->stage->rows)
 	{
@@ -63,7 +67,9 @@ void	init_player(t_game *game)
 
 t_game	*del_game(t_game *game)
 {
+	del_textures(game->mlx, game->textures);
 	del_img(game->img);
+	del_texture(game->mlx, game->player->tx);
 	free(game->player);
 	game->stage = del_stage(game->stage);
 	mlx_destroy_window(game->mlx, game->win);
