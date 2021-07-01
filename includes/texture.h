@@ -6,7 +6,8 @@ enum			e_texture
 	TX_COLLECTIBLE,
 	TX_EXIT,
 	TX_FLOOR,
-	TX_WALL
+	TX_WALL,
+	TX_OPPO
 };
 
 typedef struct s_texture

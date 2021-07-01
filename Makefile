@@ -12,9 +12,9 @@ SRCS	:= main.c error.c callbacks.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
 B_SRCS	:= main.c error.c callbacks_bonus.c\
-			game/game.c game/console.c game/img.c game/draw.c\
-			stage/stage.c stage/valid_map.c\
-			assets/texture.c\
+			game/game.c game/console.c game/img.c game/draw_bonus.c\
+			stage/stage.c stage/valid_map_bonus.c\
+			assets/texture_bonus.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 BONUSFLG:= .bonus_flg

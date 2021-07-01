@@ -26,7 +26,7 @@ typedef struct s_game
 	t_texture	**textures;
 	size_t		steps;
 	bool		flg_render;
-	bool		flg_win;
+	int			flg_win;
 }	t_game;
 
 t_game	*new_game(char *filepath);

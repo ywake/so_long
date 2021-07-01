@@ -17,5 +17,6 @@
 # define PATH_FLOOR			("./assets/floor.xpm")
 # define PATH_WALL			("./assets/wall.xpm")
 # define PATH_PLAYER		("./assets/DinoSprites32.xpm")
+# define PATH_OPPO			("./assets/DinoSprites_mort32_R.xpm")
 
 #endif

@@ -4,13 +4,14 @@
 #include "libft.h"
 #include "game.h"
 #include "x.h"
-#include "mlx.h"
-#include "property.h"
+#include "logging.h"
 
 int	close_game(t_game *game)
 {
-	if (game->flg_win)
+	if (game->flg_win == 1)
 		printf("%zuTurns Clear!", game->steps);
+	else if (game->flg_win == -1)
+		printf("%zuTurns "RED"You Lose!!"END, game->steps);
 	else
 		ft_putendl_fd("close", 1);
 	del_game(game);
@@ -33,12 +34,14 @@ int	press_key(int key, t_game *game)
 	return (0);
 }
 
-bool	win_check(t_game *game)
+int	win_check(t_game *game)
 {
+	if (game->stage->map[game->player->y][game->player->x] == 'O')
+		return (-1);
 	if (game->stage->map[game->player->y][game->player->x] != 'E')
-		return (false);
+		return (0);
 	if (stage_count_obj(game->stage, 'C') == 0)
-		return (true);
+		return (1);
 	return (false);
 }
 
@@ -52,14 +55,10 @@ int	main_loop(t_game *game)
 		print_map(game);
 		printf("\n");
 		game_render(game);
-		mlx_string_put(game->mlx, game->win, 10, 20,
-			C_WHITE, ft_itoa(game->steps));
 		game->flg_render = false;
-		if (win_check(game))
-		{
-			game->flg_win = true;
+		game->flg_win = win_check(game);
+		if (game->flg_win)
 			close_game(game);
-		}
 	}
 	return (0);
 }
