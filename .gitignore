@@ -13,8 +13,8 @@
 !srcs/*/*.c
 !includes/
 !includes/*.h
-!libs/libmlx_Linux.a
-!libs/libmlx.dylib
+!libs
+!libs/.gitkeep
 !auto_test.sh
 !test/
 !test/**/
