@@ -11,6 +11,13 @@ SRCS	:= main.c error.c callbacks.c\
 			assets/texture.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 OBJS	:= $(SRCS:%.c=$(SRCDIR)%.o)
+B_SRCS	:= main.c error.c callbacks_bonus.c\
+			game/game.c game/console.c game/img.c game/draw.c\
+			stage/stage.c stage/valid_map.c\
+			assets/texture.c\
+			utils/ft_xmalloc.c utils/get_next_line.c
+B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
+BONUSFLG:= .bonus_flg
 
 ifeq ($(shell uname), Linux)
 	LIBS += -lmlx_Linux
@@ -37,7 +44,11 @@ $(LIBFT): ./Libft/*.c
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(OBJS) -o $(NAME) $(LIBS)
 
-bonus: all
+bonus: $(BONUSFLG)
+
+$(BONUSFLG): $(B_OBJS) $(LIBFT)
+	@touch $(BONUSFLG)
+	$(CC) $(B_OBJS) -o $(NAME) $(LIBS)
 
 clean:
 	$(MAKE) clean -C ./Libft
