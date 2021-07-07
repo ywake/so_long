@@ -87,7 +87,7 @@ void	draw_player(t_game *game)
 				if (game->stage->map[y][x] == 'E')
 					draw_texture(game->img, x, y, game->textures[TX_EXIT]);
 				draw_texture(game->img, x, y,
-					game->player->tx[game->frame / 600]);
+					game->player->tx[game->frame / 240]);
 			}
 			x++;
 		}

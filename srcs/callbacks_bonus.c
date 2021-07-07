@@ -61,7 +61,7 @@ int	main_loop(t_game *game)
 			close_game(game);
 	}
 	draw_player(game);
-	game->frame = (game->frame + 1) % 3600;
+	game->frame = (game->frame + 1) % 1440;
 	return (0);
 }
 
