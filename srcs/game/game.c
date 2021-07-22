@@ -23,12 +23,12 @@ t_game	*new_game(char *filepath)
 	game->frame = 0;
 	game->flg_win = false;
 	game->flg_render = true;
-	game->mlx = mlx_init();
-	if (game->mlx == NULL)
-		error("A problem occurred in mlx_init.");
 	game->stage = new_stage(filepath);
 	width = game->stage->cols * TILE_SIZE;
 	height = game->stage->rows * TILE_SIZE;
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		error("A problem occurred in mlx_init.");
 	game->win = mlx_new_window(game->mlx, width, height, "so_long");
 	if (game->mlx == NULL)
 		error("A problem occurred in mlx_new_widow.");
