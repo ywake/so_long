@@ -52,6 +52,7 @@ $(BONUSFLG): $(LIBFT) $(B_OBJS)
 
 clean:
 	$(MAKE) clean -C ./Libft
+	rm -f leaksout
 	rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
@@ -67,6 +68,9 @@ norm:
 
 leak: $(LIBFT) $(OBJS)
 	$(CC) $(LIBS) $(OBJS) ./test/sharedlib.c -o $(NAME)
+
+bonus_leak: $(LIBFT) $(B_OBJS)
+	$(CC) $(LIBS) $(B_OBJS) ./test/sharedlib.c -o $(NAME)
 
 autotest: leak
 	bash auto_test.sh $(TEST)
