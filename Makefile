@@ -3,7 +3,7 @@ CC		:= gcc
 INCLUDE	:= -I./includes -I./Libft -I./minilibx-linux
 CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBFT	:= ./libs/libft.a
-LIBS	:= -L./libs -lft -lXext -lX11 -lm
+LIBS	:= -L./libs -lft -lmlx_$(shell uname) -lXext -lX11 -lm
 SRCDIR	:= ./srcs/
 SRCS	:= main.c error.c callbacks.c\
 			game/game.c game/console.c game/img.c game/draw.c\
@@ -19,10 +19,14 @@ B_SRCS	:= main.c error.c callbacks_bonus.c\
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 BONUSFLG:= .bonus_flg
 
-ifeq ($(shell uname), Linux)
-	LIBS += -lmlx_Linux
-else
-	LIBS +=  -L/usr/X11R6/lib -lmlx_Darwin
+# ifeq ($(shell uname), Linux)
+# 	LIBS += -lmlx_Linux -lXext -lX11 -lm
+# else
+# 	LIBS += -L/usr/X11R6/lib -lmlx_Darwin -lXext -lX11 -lm
+# endif
+
+ifeq ($(shell uname), Darwin)
+	LIBS += -L/usr/X11R6/lib
 endif
 
 .PHONY: all clean fclean re bonus test init norm autotest
@@ -35,20 +39,20 @@ all: $(NAME)
 init:
 	git submodule update --init
 	$(MAKE) -C ./minilibx-linux
-	mv ./minilibx-linux/libmlx*.a ./libs/
+	cp ./minilibx-linux/libmlx*.a ./libs/
 
 $(LIBFT): ./Libft/*.c
 	$(MAKE) bonus -C ./Libft
-	mv ./Libft/libft.a ./libs/libft.a
+	cp ./Libft/libft.a ./libs/libft.a
 
-$(NAME): init $(LIBFT) $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LIBS)
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
 bonus: $(BONUSFLG)
 
 $(BONUSFLG): $(LIBFT) $(B_OBJS)
 	@touch $(BONUSFLG)
-	$(CC) $(B_OBJS) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(B_OBJS) -o $(NAME) $(LIBS)
 
 clean:
 	$(MAKE) clean -C ./Libft
@@ -56,6 +60,7 @@ clean:
 	rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
+	$(MAKE) fclean -C ./Libft
 	rm -f libs/libft.a
 	rm -f $(NAME)
 	rm -f .bonus_flg
@@ -67,10 +72,10 @@ norm:
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
 leak: $(LIBFT) $(OBJS)
-	$(CC) $(LIBS) $(OBJS) ./test/sharedlib.c -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) ./test/sharedlib.c -o $(NAME) $(LIBS)
 
 bonus_leak: $(LIBFT) $(B_OBJS)
-	$(CC) $(LIBS) $(B_OBJS) ./test/sharedlib.c -o $(NAME)
+	$(CC) $(CFLAGS) $(B_OBJS) ./test/sharedlib.c -o $(NAME) $(LIBS)
 
 autotest: leak
 	bash auto_test.sh $(TEST)

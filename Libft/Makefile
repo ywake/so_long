@@ -6,7 +6,7 @@
 #    By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/22 15:19:36 by ywake             #+#    #+#              #
-#    Updated: 2021/07/19 16:49:52 by ywake            ###   ########.fr        #
+#    Updated: 2021/07/24 13:43:52 by ywake            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,6 @@ clean:
 	rm -f $(OBJ) $(OBJBONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUSFLG)
 
 re: fclean all

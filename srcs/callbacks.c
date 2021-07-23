@@ -8,7 +8,7 @@
 int	close_game(t_game *game)
 {
 	if (game->flg_win)
-		printf("%zuTurns Clear!", game->steps);
+		printf("%zuTurns Clear!\n", game->steps);
 	else
 		ft_putendl_fd("close", 1);
 	del_game(game);

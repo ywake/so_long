@@ -9,9 +9,9 @@
 int	close_game(t_game *game)
 {
 	if (game->flg_win == 1)
-		printf("%zuTurns Clear!", game->steps);
+		printf("%zuTurns Clear!\n", game->steps);
 	else if (game->flg_win == -1)
-		printf("%zuTurns "RED"You Lose!!"END, game->steps);
+		printf("%zuTurns "RED"You Lose!!\n"END, game->steps);
 	else
 		ft_putendl_fd("close", 1);
 	del_game(game);
