@@ -18,6 +18,7 @@ B_SRCS	:= main.c error.c callbacks_bonus.c\
 			utils/ft_xmalloc.c utils/get_next_line.c
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 BONUSFLG:= .bonus_flg
+DSTRCTR	:= ./test/destructor.c
 
 # ifeq ($(shell uname), Linux)
 # 	LIBS += -lmlx_Linux -lXext -lX11 -lm
@@ -71,11 +72,17 @@ norm:
 	@norminette srcs includes Libft | grep -v ": OK!" \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
-leak: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) ./test/sharedlib.c -o $(NAME) $(LIBS)
+debug: $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME) $(LIBS)
 
-bonus_leak: $(LIBFT) $(B_OBJS)
-	$(CC) $(CFLAGS) $(B_OBJS) ./test/sharedlib.c -o $(NAME) $(LIBS)
+$(DSTRCTR):
+	curl https://gist.githubusercontent.com/ywake/793a72da8cdae02f093c02fc4d5dc874/raw/destructor.c > $(DSTRCTR)
+
+leak: $(LIBFT) $(OBJS) $(DSTRCTR)
+	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME) $(LIBS)
+
+bonus_leak: $(LIBFT) $(B_OBJS) $(DSTRCTR)
+	$(CC) $(CFLAGS) $(B_OBJS) $(DSTRCTR) -o $(NAME) $(LIBS)
 
 autotest: leak
 	bash auto_test.sh $(TEST)

@@ -57,6 +57,7 @@ void	open_ber(char *filepath, t_stage *stg, t_list **map)
 		error("Failed to open().");
 	stg->cols = -1;
 	stg->rows = 0;
+	*line = NULL;
 	while (set_rtn_int(&num, get_next_line(fd, line)) > 0)
 	{
 		if (stg->cols != -1 && stg->cols != (int)ft_strlen(*line))
