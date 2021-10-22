@@ -9,11 +9,11 @@
 int	close_game(t_game *game)
 {
 	if (game->flg_win == 1)
-		printf("%zuTurns Clear!\n", game->steps);
+		printf("%zu Turns Clear!\n", game->steps);
 	else if (game->flg_win == -1)
-		printf("%zuTurns "RED"You Lose!!\n"END, game->steps);
+		printf("%zu Turns "RED"You Lose!!\n"END, game->steps);
 	else
-		ft_putendl_fd("close", 1);
+		ft_putendl_fd("bye!", 1);
 	del_game(game);
 	exit(0);
 }

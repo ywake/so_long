@@ -69,7 +69,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette srcs includes Libft | grep -v ": OK!" \
+	@norminette srcs includes Libft | grep -v -e ": OK!" -v -e "Missing or invalid header. Header are being reintroduced as a mandatory part of your files. This is not yet an error." \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
 debug: $(LIBFT) $(OBJS)
