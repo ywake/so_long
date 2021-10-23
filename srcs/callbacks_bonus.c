@@ -30,7 +30,12 @@ int	press_key(int key, t_game *game)
 		game->player->move_x = -1;
 	if (key == KEY_D)
 		game->player->move_x = +1;
-	game->flg_render = true;
+	if (player_move(game))
+	{
+		game->steps++;
+		printf("%zuT\n", game->steps);
+		game->flg_render = true;
+	}
 	return (0);
 }
 
@@ -49,11 +54,6 @@ int	main_loop(t_game *game)
 {
 	if (game->flg_render)
 	{
-		if (player_move(game))
-			game->steps++;
-		printf("--- %zuT ---\n", game->steps);
-		print_map(game);
-		printf("\n");
 		game_render(game);
 		game->flg_render = false;
 		game->flg_win = win_check(game);

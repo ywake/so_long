@@ -84,15 +84,14 @@ bool	player_move(t_game *game)
 	size_t	new_x;
 	size_t	new_y;
 
+	if (game->player->move_x == 0 && game->player->move_y == 0)
+		return (false);
 	new_x = game->player->x + game->player->move_x;
 	new_y = game->player->y + game->player->move_y;
 	game->player->move_x = 0;
 	game->player->move_y = 0;
 	if (game->stage->map[new_y][new_x] == '1')
-	{
-		ft_putendl_fd("wall", 1);
 		return (false);
-	}
 	if (game->stage->map[new_y][new_x] == 'C')
 		game->stage->map[new_y][new_x] = '0';
 	game->player->x = new_x;
