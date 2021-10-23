@@ -6,7 +6,7 @@
 #include "libft.h"
 #include "utils.h"
 
-void	open_ber(char *filepath, t_stage *stg, t_list **map);
+void	read_ber(char *filepath, t_list **map);
 void	read_map(t_stage *stg, t_list *map);
 
 t_stage	*new_stage(char *filepath)
@@ -17,7 +17,8 @@ t_stage	*new_stage(char *filepath)
 
 	map = NULL;
 	stage = (t_stage *)ft_xmalloc(sizeof(t_stage));
-	open_ber(filepath, stage, &map);
+	read_ber(filepath, &map);
+	valid_ber(map);
 	save = map;
 	read_map(stage, map);
 	ft_lstclear(&save, free);
@@ -42,7 +43,7 @@ t_stage	*del_stage(t_stage *stg)
 	return (NULL);
 }
 
-void	open_ber(char *filepath, t_stage *stg, t_list **map)
+void	read_ber(char *filepath, t_list **map)
 {
 	int		num;
 	char	*line[1];
@@ -55,26 +56,25 @@ void	open_ber(char *filepath, t_stage *stg, t_list **map)
 	fd = open(filepath, O_RDONLY);
 	if (fd == -1)
 		error("Failed to open().");
-	stg->cols = -1;
-	stg->rows = 0;
 	*line = NULL;
-	while (set_rtn_int(&num, get_next_line(fd, line)) > 0)
+	num = 1;
+	while (num > 0)
 	{
-		if (stg->cols != -1 && stg->cols != (int)ft_strlen(*line))
-			error("The map must be rectangular.");
-		stg->cols = (int)ft_strlen(*line);
+		num = get_next_line(fd, line);
 		ft_lstadd_front(map, ft_lstnew(*line));
-		stg->rows++;
 	}
 	if (num == -1 && close(fd) == -1)
 		error("Failed to operate the file.");
-	free(*line);
 }
 
 void	read_map(t_stage *stg, t_list *map)
 {
 	int		rows;
 
+	while (map && ft_strlen(map->content) == 0)
+		map = map->next;
+	stg->rows = ft_lstsize(map);
+	stg->cols = ft_strlen(map->content);
 	stg->map = (char **)ft_xmalloc(sizeof(char *) * (stg->rows + 1));
 	rows = stg->rows;
 	stg->map[rows] = NULL;

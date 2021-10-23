@@ -73,3 +73,18 @@ void	valid_map(t_stage *stg)
 	if (!is_surround(stg))
 		error("MAP: Not surrounded by walls.");
 }
+
+void	valid_ber(t_list *map)
+{
+	size_t	stdcol;
+
+	while (map && ft_strlen(map->content) == 0)
+		map = map->next;
+	stdcol = ft_strlen(map->content);
+	while (map)
+	{
+		if (stdcol != ft_strlen(map->content))
+			error("The map must be rectangular.");
+		map = map->next;
+	}
+}
