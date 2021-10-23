@@ -37,6 +37,6 @@ void	game_render(t_game *game);
 void	draw_stage(t_game *game);
 void	init_player_texture(t_game *game);
 void	del_player_texture(t_game *game);
-void	draw_player(t_game *game);
+void	draw_player(t_game *game, int anime_index);
 
 #endif

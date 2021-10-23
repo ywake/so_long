@@ -5,6 +5,9 @@
 #include "game.h"
 #include "x.h"
 #include "logging.h"
+#include "mlx.h"
+
+#define RATE (12000)
 
 int	close_game(t_game *game)
 {
@@ -52,16 +55,18 @@ int	win_check(t_game *game)
 
 int	main_loop(t_game *game)
 {
-	if (game->flg_render)
+	if (game->flg_render || (game->frame % RATE == 0))
 	{
 		game_render(game);
+		draw_player(game, game->frame / RATE);
+		mlx_string_put(game->mlx, game->win, 10, 10,
+			0x00FFFFFF, ft_itoa(game->steps));
 		game->flg_render = false;
 		game->flg_win = win_check(game);
 		if (game->flg_win)
 			close_game(game);
 	}
-	draw_player(game);
-	game->frame = (game->frame + 1) % 1440;
+	game->frame = (game->frame + 1) % (RATE * 6);
 	return (0);
 }
 

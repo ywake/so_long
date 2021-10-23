@@ -70,7 +70,7 @@ void	draw_stage(t_game *game)
 	}
 }
 
-void	draw_player(t_game *game)
+void	draw_player(t_game *game, int anime_index)
 {
 	int	x;
 	int	y;
@@ -86,8 +86,7 @@ void	draw_player(t_game *game)
 				draw_texture(game->img, x, y, game->textures[TX_FLOOR]);
 				if (game->stage->map[y][x] == 'E')
 					draw_texture(game->img, x, y, game->textures[TX_EXIT]);
-				draw_texture(game->img, x, y,
-					game->player->tx[game->frame / 240]);
+				draw_texture(game->img, x, y, game->player->tx[anime_index]);
 			}
 			x++;
 		}
