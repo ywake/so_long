@@ -72,17 +72,25 @@ norm:
 	@norminette srcs includes Libft | grep -v -e ": OK!" -v -e "Missing or invalid header. Header are being reintroduced as a mandatory part of your files. This is not yet an error." \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
-debug: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME) $(LIBS)
 
 $(DSTRCTR):
 	curl https://gist.githubusercontent.com/ywake/793a72da8cdae02f093c02fc4d5dc874/raw/destructor.c > $(DSTRCTR)
 
-leak: $(LIBFT) $(OBJS) $(DSTRCTR)
+leak_Darwin: $(LIBFT) $(OBJS) $(DSTRCTR)
 	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME) $(LIBS)
 
-bonus_leak: $(LIBFT) $(B_OBJS) $(DSTRCTR)
+leak_Linux: $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME) $(LIBS)
+
+leak: leak_$(shell uname)
+
+bonus_leak_Darwin: $(LIBFT) $(B_OBJS) $(DSTRCTR)
 	$(CC) $(CFLAGS) $(B_OBJS) $(DSTRCTR) -o $(NAME) $(LIBS)
+
+bonus_leak_Linux: $(LIBFT) $(B_OBJS)
+	$(CC) $(CFLAGS) $(B_OBJS) -fsanitize=address -o $(NAME) $(LIBS)
+
+bonus_leak: bonus_leak_$(shell uname)
 
 autotest: leak
 	bash auto_test.sh $(TEST)

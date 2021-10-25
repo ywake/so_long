@@ -55,12 +55,16 @@ int	win_check(t_game *game)
 
 int	main_loop(t_game *game)
 {
+	char	*turn_str;
+
 	if (game->flg_render || (game->frame % RATE == 0))
 	{
 		game_render(game);
 		draw_player(game, game->frame / RATE);
+		turn_str = ft_itoa(game->steps);
 		mlx_string_put(game->mlx, game->win, 10, 10,
-			0x00FFFFFF, ft_itoa(game->steps));
+			0x00FFFFFF, turn_str);
+		free(turn_str);
 		game->flg_render = false;
 		game->flg_win = win_check(game);
 		if (game->flg_win)
