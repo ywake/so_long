@@ -30,7 +30,7 @@ ifeq ($(shell uname), Darwin)
 	LIBS += -L/usr/X11R6/lib
 endif
 
-.PHONY: all clean fclean re bonus test init norm autotest
+.PHONY: all clean fclean re bonus init norm autotest leak leak_Darwin leak_Linux bonus_leak bonus_leak_Darwin bonus_leak_Linux
 
 all: $(NAME)
 

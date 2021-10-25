@@ -14,7 +14,8 @@
 !includes/
 !includes/*.h
 !libs
-!libs/.gitkeep
+!libs/libmlx_Darwin.a
+!libs/libmlx_Linux.a
 !auto_test.sh
 !test/
 !test/**/
