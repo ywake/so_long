@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include "libft.h"
+#include "error.h"
 
 #define BUFFER_SIZE (1000)
 
@@ -35,7 +36,8 @@ int	get_next_line(int fd, char **line)
 		return (myabort(rdbuf, NULL, NULL));
 	*line = *remain;
 	*remain = NULL;
-	while (set_rtn_long(&rtn, read(fd, rdbuf, BUFFER_SIZE)) >= 0)
+	while (set_rtn_long(&rtn,
+			catch_err(read(fd, rdbuf, BUFFER_SIZE), "read")) >= 0)
 	{
 		rdbuf[rtn] = '\0';
 		free_set((void **)line, ft_strjoin(*line, (char *)rdbuf));

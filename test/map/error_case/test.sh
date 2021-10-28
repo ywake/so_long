@@ -1,6 +1,6 @@
 FLG=0
 DIR=${0%/*.sh}
-for path in $(find "$DIR" -type f -name "*.ber" | sort -n -t "/" -k 5);
+for path in $(find "$DIR" -name "*.ber" | sort -n -t "/" -k 5);
 do
 	echo --- `basename "$path"` ---
 	$REPO_ROOT/so_long $"$path"
