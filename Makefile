@@ -92,5 +92,8 @@ bonus_leak_Linux: $(LIBFT) $(B_OBJS)
 
 bonus_leak: bonus_leak_$(shell uname)
 
-autotest: leak
+autotest:
+	$(MAKE) leak
+	bash auto_test.sh $(TEST) && \
+	$(MAKE) bonus_leak && \
 	bash auto_test.sh $(TEST)
