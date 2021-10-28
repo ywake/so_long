@@ -60,10 +60,10 @@ void	read_ber(char *filepath, t_list **map)
 	num = 1;
 	while (num > 0)
 	{
-		num = get_next_line(fd, line);
+		num = catch_err(get_next_line(fd, line), "get_next_line");
 		ft_lstadd_front(map, ft_lstnew(*line));
 	}
-	if (num == -1 && close(fd) == -1)
+	if (close(fd) == -1)
 		error("Failed to operate the file.");
 }
 
