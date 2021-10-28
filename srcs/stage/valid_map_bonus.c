@@ -78,8 +78,12 @@ void	valid_ber(t_list *map)
 {
 	size_t	stdcol;
 
+	if (map == NULL || map->content == NULL)
+		error("The map is empty.");
 	while (map && ft_strlen(map->content) == 0)
 		map = map->next;
+	if (map == NULL || map->content == NULL)
+		error("The map is empty.");
 	stdcol = ft_strlen(map->content);
 	while (map)
 	{
