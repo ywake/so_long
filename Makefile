@@ -37,11 +37,6 @@ all: $(NAME)
 %.o: $(SRCDIR)%.c *.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-init:
-	git submodule update --init
-	$(MAKE) -C ./minilibx-linux
-	cp ./minilibx-linux/libmlx*.a ./libs/
-
 $(LIBFT): ./Libft/*.c
 	$(MAKE) bonus -C ./Libft
 	cp ./Libft/libft.a ./libs/libft.a
@@ -69,7 +64,7 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette srcs includes Libft | grep -v -e ": OK!" -v -e "Missing or invalid header. Header are being reintroduced as a mandatory part of your files. This is not yet an error." \
+	@norminette srcs includes Libft | grep -v -e ": OK!" -v -e "This is not yet an error." \
 	|| printf "\e[32m%s\n\e[m" "Norm OK!"
 
 
